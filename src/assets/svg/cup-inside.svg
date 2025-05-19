@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1000 1000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Watermelon" transform="matrix(0.879984,0,0,0.879984,24.383,-344.911)">
+        <g>
+            <path id="cups" d="M498.255,1228.05C392.327,1273.57 7.757,1319.81 34.006,1220.88C52.163,1152.44 79.012,932.303 222.796,832.574C272.756,797.922 505.183,1088.97 524.944,1187.17C526.077,1187.02 527.216,1186.89 528.359,1186.77C539.451,1185.59 550.846,1185.69 561.504,1187.67C576.865,1117.52 654.55,947.454 816.28,834.949C826.325,827.961 834.754,827.026 840.573,831.609C896.87,875.948 1094.08,1182.29 1038.46,1262C999.346,1318.04 628.472,1286.39 567.195,1225.31C557.488,1219.3 544.299,1219.36 531.964,1220.67C518.951,1222.05 506.602,1225.39 498.255,1228.05Z" style="fill:rgb(214,59,75);"/>
+        </g>
+    </g>
+</svg>
