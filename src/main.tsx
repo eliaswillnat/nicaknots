@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import './fonts/fonts.css';
 
+const AdminAccessGate = lazy(() => import('./AdminAccessGate.tsx').then((module) => ({ default: module.AdminAccessGate })))
 const AdminPage = lazy(() => import('./AdminPage.tsx').then((module) => ({ default: module.AdminPage })))
 
 const path = window.location.pathname.replace(/\/+$/, '') || '/'
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {isAdmin ? (
       <Suspense fallback={<div className="min-h-screen bg-white" />}>
-        <AdminPage />
+        <AdminAccessGate>
+          {(handleSignOut) => <AdminPage onSignOut={handleSignOut} />}
+        </AdminAccessGate>
       </Suspense>
     ) : <App />}
   </StrictMode>,

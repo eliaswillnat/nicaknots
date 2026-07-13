@@ -7,6 +7,89 @@
   --admin-rose-dark: #704844;
 }
 
+.admin-auth-shell {
+  min-height: 100vh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  color: var(--admin-ink);
+  background: #ebe8e6;
+}
+
+.admin-auth-panel {
+  width: min(100%, 420px);
+  padding: 34px;
+  background: white;
+  border: 1px solid var(--admin-line);
+  border-radius: 6px;
+  box-shadow: 0 16px 40px rgba(45, 36, 33, 0.1);
+}
+
+.admin-auth-brand {
+  display: inline-block;
+  margin-bottom: 38px;
+  color: var(--admin-ink);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-decoration: none;
+}
+
+.admin-auth-icon {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+  display: grid;
+  place-items: center;
+  color: var(--admin-rose-dark);
+  background: var(--admin-soft);
+  border: 1px solid var(--admin-line);
+  border-radius: 50%;
+}
+
+.admin-auth-panel h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.admin-auth-panel > p {
+  margin: 0 0 24px;
+  color: var(--admin-muted);
+  font-size: 15px;
+}
+
+.admin-auth-error {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  color: #6b2722;
+  background: #fff0ee;
+  border: 1px solid #e4c1bd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.admin-auth-button {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: white;
+  background: var(--admin-rose);
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.admin-auth-button:hover:not(:disabled) { background: var(--admin-rose-dark); }
+.admin-auth-button:disabled { cursor: wait; opacity: 0.7; }
+
 .admin-shell {
   min-height: 100vh;
   color: var(--admin-ink);
@@ -428,9 +511,11 @@
 @media (max-width: 900px) {
   .admin-topbar { position: static; padding: 12px 16px; }
   .admin-actions .secondary-command,
-  .admin-actions .icon-command { display: none; }
+  .admin-actions .icon-command:not(.sign-out-command) { display: none; }
   .admin-actions .primary-command span { display: none; }
   .admin-actions .primary-command { width: 44px; padding: 0; }
+  .admin-actions .sign-out-command { width: 44px; padding: 0; }
+  .admin-actions .sign-out-command span { display: none; }
   .admin-mobile-tabs {
     padding: 10px 16px;
     display: grid;
@@ -449,6 +534,8 @@
 }
 
 @media (max-width: 560px) {
+  .admin-auth-shell { padding: 16px; }
+  .admin-auth-panel { padding: 26px 22px; }
   .form-grid.two-columns,
   .settings-grid { grid-template-columns: 1fr; }
   .item-row {

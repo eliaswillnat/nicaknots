@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Download, Eye, FilePlus2, Plus, Printer, Settings2, Trash2 } from 'lucide-react';
+import { Download, Eye, FilePlus2, LogOut, Plus, Printer, Settings2, Trash2 } from 'lucide-react';
 import { InvoicePreviewFrame } from './InvoicePreviewFrame';
 import { generateInvoicePdf } from './invoicePdf';
 import {
@@ -74,7 +74,11 @@ const validateInvoice = (invoice: InvoiceData, seller: SellerDetails) => {
   return [...new Set(missing)];
 };
 
-export function AdminPage() {
+type AdminPageProps = {
+  onSignOut: () => void | Promise<void>;
+};
+
+export function AdminPage({ onSignOut }: AdminPageProps) {
   const [seller, setSeller] = useState<SellerDetails>(() => loadStored(SELLER_KEY, defaultSeller));
   const [invoice, setInvoice] = useState<InvoiceData>(() => {
     const saved = loadStored<InvoiceData | null>(DRAFT_KEY, null);
@@ -150,6 +154,10 @@ export function AdminPage() {
           <button type="button" className="primary-command" onClick={() => prepareDocument(() => generateInvoicePdf(invoice, seller))} aria-label="Rechnung als PDF laden">
             <Download size={18} />
             <span>PDF laden</span>
+          </button>
+          <button type="button" className="icon-command sign-out-command" onClick={onSignOut} title="Abmelden" aria-label="Abmelden">
+            <LogOut size={18} />
+            <span>Abmelden</span>
           </button>
         </div>
       </header>
