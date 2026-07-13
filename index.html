@@ -8,6 +8,12 @@
       name="description"
       content="Nicaknots bikini color customizer"
     />
+    <script>
+      try {
+        const theme = localStorage.getItem('nicaknots.theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
     <title>Nicaknots</title>
   </head>
   <body>
