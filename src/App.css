@@ -60,7 +60,6 @@ body {
 
 .refresh-button {
   color: var(--page-foreground);
-  border-color: var(--page-border);
 }
 
 @media (max-width: 420px) {

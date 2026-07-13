@@ -205,10 +205,9 @@ function App() {
           <button
             onClick={randomizeColors}
             aria-label="Randomize colors"
-            className="refresh-button flex items-center justify-center w-[3rem] h-[3rem] rounded-full border-2 bg-transparent hover:scale-105 transition-transform"
-            style={{ padding: 0 }}
+            className="refresh-button flex items-center justify-center hover:opacity-70 transition-opacity"
           >
-            <RefreshCcw size={24} />
+            <RefreshCcw size={18} />
           </button>
         </div>
       </header>
@@ -253,9 +252,9 @@ function App() {
 
 
       {/* Available Colors */}
-      <h2 className="text-lg font-semibold mb-4 px-4 sm:px-12">Colors</h2>
-      <section>
-        <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1.5rem] px-4 sm:px-12">
+      <section className="px-4 sm:px-12">
+        <h2 className="text-lg font-semibold mb-4">Colors</h2>
+        <div className="flex flex-wrap justify-start gap-x-[1rem] gap-y-[1.5rem]">
           {palette.map(({ id, hex }, idx) => (
             <div key={idx} className="flex flex-col items-center space-y-1">
               <button
