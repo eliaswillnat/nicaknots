@@ -25,3 +25,7 @@ firebase-debug.log
 *.sln
 *.sw?
 *~lock~
+# Environment variables
+.env
+.env.*
+!.env.example
