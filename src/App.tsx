@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { RefreshCcw } from 'lucide-react';
+import { Monitor, Moon, RefreshCcw, Sun } from 'lucide-react';
 import Strings from './components/BikiniParts/Strings';
 import CupInside from './components/BikiniParts/CupInside';
 import FlowerBG from './components/BikiniParts/FlowerBg';
@@ -62,6 +62,21 @@ function adjustColor(hex: string): string {
   return hslToHex(h, newS, newL);
 }
 
+type Theme = 'system' | 'light' | 'dark';
+
+const themeOptions: { value: Theme; label: string; Icon: typeof Sun }[] = [
+  { value: 'system', label: 'System', Icon: Monitor },
+  { value: 'light', label: 'Light', Icon: Sun },
+  { value: 'dark', label: 'Dark', Icon: Moon },
+];
+
+function getStoredTheme(): Theme {
+  const storedTheme = localStorage.getItem('nicaknots.theme');
+  return storedTheme === 'light' || storedTheme === 'dark' || storedTheme === 'system'
+    ? storedTheme
+    : 'system';
+}
+
 function App() {
   // ── editable colours for each part ──
   const [partColors, setPartColors] = useState({
@@ -73,6 +88,7 @@ function App() {
 
   const [selectedPart, setSelectedPart] = useState<keyof typeof partColors | null>(null);
   const [clickedColorId, setClickedColorId] = useState<string | null>(null);
+  const [theme, setTheme] = useState<Theme>(getStoredTheme);
 
   // Randomize all part colors from the palette
   function randomizeColors() {
@@ -139,16 +155,30 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (theme === 'system') {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.removeItem('nicaknots.theme');
+      return;
+    }
+
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('nicaknots.theme', theme);
+  }, [theme]);
+
+  const activeTheme = themeOptions.find((option) => option.value === theme)!;
+  const ThemeIcon = activeTheme.Icon;
+
   return (
-    <div className="min-h-screen p-4 bg-white relative">
+    <div className="app-shell min-h-screen p-4 relative">
       {/* Logo and Menu */}
       <header className="flex justify-between items-center mb-6">
         {/* Menu icon on the left */}
         <div className="flex items-center pl-4">
           <div className="w-6 h-6 flex flex-col justify-between cursor-pointer">
-            <span className="h-[2px] w-full bg-black block" />
-            <span className="h-[2px] w-full bg-black block" />
-            <span className="h-[2px] w-full bg-black block" />
+            <span className="menu-line h-[2px] w-full block" />
+            <span className="menu-line h-[2px] w-full block" />
+            <span className="menu-line h-[2px] w-full block" />
           </div>
         </div>
 
@@ -158,14 +188,27 @@ function App() {
         </h1>
 
         {/* Refresh button on the right */}
-        <div className="pr-4">
+        <div className="header-controls pr-4">
+          <label className="theme-control">
+            <ThemeIcon size={18} aria-hidden="true" />
+            <span className="sr-only">Color theme</span>
+            <select
+              value={theme}
+              onChange={(event) => setTheme(event.target.value as Theme)}
+              aria-label="Color theme"
+            >
+              {themeOptions.map(({ value, label }) => (
+                <option key={value} value={value}>{label}</option>
+              ))}
+            </select>
+          </label>
           <button
             onClick={randomizeColors}
             aria-label="Randomize colors"
-            className="flex items-center justify-center w-[3rem] h-[3rem] rounded-full border-2 border-black bg-transparent hover:scale-105 transition-transform"
-            style={{ color: 'black', padding: 0 }}
+            className="refresh-button flex items-center justify-center w-[3rem] h-[3rem] rounded-full border-2 bg-transparent hover:scale-105 transition-transform"
+            style={{ padding: 0 }}
           >
-            <RefreshCcw size={24} stroke="black" />
+            <RefreshCcw size={24} />
           </button>
         </div>
       </header>
